@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public int score = 0;
-    // Start is called before the first frame update
+
+    PlayerController playerController;
+    private void Awake()
+    {
+        playerController = FindObjectOfType<PlayerController>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       //if (collision.transform.tag == "Player")
-       // {
-       //     collision.GetComponent<PlayerController>().score += 1;
-       //     score = collision.GetComponent<PlayerController>().score;
-       //     Debug.Log("Punti: " + score);
-       //     Destroy(gameObject);
-       // }
+       if (collision.transform.tag == "Player")
+        {
+            playerController.score += 1;
+            Debug.Log("Punti: " + playerController.score);
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         
