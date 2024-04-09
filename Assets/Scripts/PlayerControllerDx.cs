@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerDx : MonoBehaviour
 {
     public int score = 0;
     public float speed;
     public Vector2 value;
     Rigidbody2D rb;
 
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
         rb = transform.GetChild(0).GetComponent<Rigidbody2D>();
 
 
-        
+
     }
 
     // Update is called once per frame
@@ -30,10 +30,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void OnMoveSX(InputAction.CallbackContext context)
+    public void OnMoveDX(InputAction.CallbackContext context)
     {
         value = context.ReadValue<Vector2>();
         Debug.Log(value);
     }
-   
+
 }
