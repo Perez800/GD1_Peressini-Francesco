@@ -17,9 +17,6 @@ public class PlayerControllerDx : MonoBehaviour
     {
         speed = 15f;
         rb = transform.GetChild(0).GetComponent<Rigidbody2D>();
-
-
-
     }
 
     // Update is called once per frame
