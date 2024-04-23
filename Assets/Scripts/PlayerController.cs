@@ -7,10 +7,12 @@ public class PlayerController : MonoBehaviour
 {
     public int score = 0;
     public float speed;
-    public Vector2 value;
+    public Vector2 movementvalue;
+    public bool grabPressed;
     Rigidbody2D rb;
+    public PlayerControllerDx rightHand;
 
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,15 +24,33 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 movementVector = new Vector2(value.x, value.y).normalized * speed;
+        if (grabPressed) 
+        {
+            rb.velocity = Vector2.zero;
+            rb.isKinematic = true;
+            return;
+        }
+        rb.isKinematic = false;
+        Vector2 movementVector = new Vector2(movementvalue.x, movementvalue.y).normalized * speed;
+        if (rightHand.grabPressed)
+        {
+            rb.gravityScale = 0;
+        }
+        else
+        {
+            rb.gravityScale = 40;
+            movementVector.y = 0;
+        }
         rb.velocity = movementVector;
     }
 
 
     public void OnMoveSX(InputAction.CallbackContext context)
     {
-        value = context.ReadValue<Vector2>();
-        Debug.Log(value);
+        movementvalue = context.ReadValue<Vector2>();
     }
-   
+    public void OnGrabSX(InputAction.CallbackContext context)
+    {
+        grabPressed = context.ReadValue<float>() > 0;
+    }
 }
